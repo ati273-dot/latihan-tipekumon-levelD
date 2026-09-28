@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lembar Latihan Pembagian — Kumon Level D</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#fbfaf7;
+    --grid-line: rgba(76,143,176,0.16);
+    --ink:#243154;
+    --ink-soft:#5a6486;
+    --pencil:#6b7280;
+    --red:#c8281f;
+    --red-soft:#e8b3ae;
+    --green:#1f8a5f;
+    --gold:#d9a02a;
+    --card-shadow: 0 1px 0 rgba(36,49,84,0.06), 0 12px 24px -16px rgba(36,49,84,0.25);
+    --radius: 14px;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:'IBM Plex Sans', sans-serif;
+    color:var(--ink);
+    background:
+      repeating-linear-gradient(0deg, transparent, transparent 27px, var(--grid-line) 27px, var(--grid-line) 28px),
+      repeating-linear-gradient(90deg, transparent, transparent 27px, var(--grid-line) 27px, var(--grid-line) 28px),
+      var(--paper);
+    min-height:100vh;
+    padding: 28px 16px 60px;
+  }
+  .page{
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  /* ---------- Header ---------- */
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+    letter-spacing:0.14em;
+    color:var(--ink-soft);
+    text-transform:uppercase;
+    margin:0 0 6px;
+  }
+  h1{
+    font-family:'IBM Plex Serif', serif;
+    font-weight:700;
+    font-size: clamp(26px, 4.5vw, 38px);
+    margin: 0 0 6px;
+    line-height:1.1;
+  }
+  .subhead{
+    color:var(--ink-soft);
+    font-size:15px;
+    margin:0 0 22px;
+    max-width:56ch;
+  }
+
+  /* ---------- Binder tabs (level selector) ---------- */
+  .tabs{
+    display:flex;
+    gap:6px;
+    flex-wrap:wrap;
+    margin-bottom: -1px;
+    position:relative;
+    z-index:2;
+  }
+  .tab{
+    font-family:'IBM Plex Mono', monospace;
+    font-weight:600;
+    font-size:13px;
+    border:none;
+    cursor:pointer;
+    color:#fff;
+    padding: 10px 16px 12px;
+    clip-path: polygon(8% 0, 92% 0, 100% 100%, 0% 100%);
+    opacity:0.72;
+    transform: translateY(6px);
+    transition: transform .18s ease, opacity .18s ease;
+  }
+  .tab:hover{ opacity:0.9; }
+  .tab.active{
+    opacity:1;
+    transform: translateY(0px);
+    box-shadow: var(--card-shadow);
+  }
+  .tab small{
+    display:block;
+    font-family:'IBM Plex Sans', sans-serif;
+    font-weight:500;
+    font-size:10px;
+    opacity:0.9;
+    letter-spacing:0.02em;
+  }
+
+  /* ---------- Worksheet card ---------- */
+  .sheet{
+    background:#fff;
+    border-radius: 0 var(--radius) var(--radius) var(--radius);
+    box-shadow: var(--card-shadow);
+    padding: 26px 24px 20px;
+    position:relative;
+    z-index:1;
+  }
+  .sheet-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:16px;
+    flex-wrap:wrap;
+    border-bottom: 2px dashed #e4e1d6;
+    padding-bottom:16px;
+    margin-bottom:20px;
+  }
+  .sheet-title{
+    font-family:'IBM Plex Serif', serif;
+    font-weight:600;
+    font-size:19px;
+    margin:0 0 4px;
+  }
+  .sheet-desc{
+    color:var(--ink-soft);
+    font-size:13.5px;
+    margin:0;
+    max-width:44ch;
+  }
+  .stat-strip{
+    display:flex;
+    gap:18px;
+    font-family:'IBM Plex Mono', monospace;
+    align-items:center;
+  }
+  .stat{
+    text-align:center;
+    min-width:56px;
+  }
+  .stat .num{
+    font-size:20px;
+    font-weight:700;
+    line-height:1;
+  }
+  .stat .lbl{
+    font-size:10px;
+    color:var(--ink-soft);
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+  }
+
+  .toolbar{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-bottom:22px;
+  }
+  button.action{
+    font-family:'IBM Plex Sans', sans-serif;
+    font-weight:600;
+    font-size:14px;
+    padding:10px 18px;
+    border-radius:9px;
+    border:2px solid var(--ink);
+    background:var(--ink);
+    color:#fff;
+    cursor:pointer;
+    transition: transform .12s ease, background .12s ease;
+  }
+  button.action.secondary{
+    background:#fff;
+    color:var(--ink);
+  }
+  button.action:hover{ transform: translateY(-1px); }
+  button.action:active{ transform: translateY(0px); }
+  button.action:disabled{
+    opacity:0.4;
+    cursor:not-allowed;
+    transform:none;
+  }
+
+  /* ---------- Problems grid ---------- */
+  .grid{
+    display:grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px 18px;
+  }
+  @media (max-width: 620px){
+    .grid{ grid-template-columns: 1fr; }
+  }
+
+  .problem{
+    position:relative;
+    border:1.5px solid #e9e6da;
+    border-radius:10px;
+    padding:14px 16px 16px;
+    background: #fffdf9;
+    min-height: 92px;
+    display:flex;
+    align-items:center;
+    gap:14px;
+  }
+  .problem.correct{ border-color: rgba(31,138,95,0.35); background: #f6fbf8; }
+  .problem.incorrect{ border-color: rgba(200,40,31,0.3); background: #fdf7f6; }
+
+  .p-index{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    color:#b3ac97;
+    position:absolute;
+    top:8px;
+    left:10px;
+  }
+
+  /* simple horizontal problems (D-I, D-II) */
+  .simple-row{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:21px;
+    font-weight:600;
+    display:flex;
+    align-items:baseline;
+    gap:8px;
+    flex-wrap:wrap;
+    margin-left:8px;
+  }
+  .simple-row .rem-part{
+    font-size:14px;
+    display:flex;
+    align-items:baseline;
+    gap:6px;
+    color:var(--ink-soft);
+  }
+
+  /* long division bracket (D-III..D-VI) */
+  .longdiv-wrap{
+    margin-left:10px;
+    display:inline-flex;
+    flex-direction:column;
+    align-items:flex-start;
+  }
+  .quot-row{
+    display:flex;
+  }
+  .quot-spacer{ visibility:hidden; }
+  .quot-input{
+    width: 3.6ch;
+  }
+  .bracket-row{
+    display:flex;
+    align-items:flex-end;
+  }
+  .divisor-box{
+    font-family:'IBM Plex Mono', monospace;
+    font-weight:700;
+    font-size:22px;
+    padding: 0 9px 3px 2px;
+    border-top: 3px solid var(--ink);
+    border-right: 3px solid var(--ink);
+    border-radius: 0 10px 0 0;
+  }
+  .dividend-box{
+    font-family:'IBM Plex Mono', monospace;
+    font-weight:700;
+    font-size:22px;
+    padding: 0 6px 3px 10px;
+  }
+  .rem-row{
+    margin-top:6px;
+    font-size:12.5px;
+    color:var(--ink-soft);
+    display:flex;
+    align-items:center;
+    gap:6px;
+    font-family:'IBM Plex Sans', sans-serif;
+  }
+
+  input.ans{
+    font-family:'IBM Plex Mono', monospace;
+    font-weight:700;
+    font-size: inherit;
+    text-align:center;
+    border:none;
+    border-bottom: 2.5px solid var(--pencil);
+    background:transparent;
+    color:var(--ink);
+    padding: 1px 2px 3px;
+    outline:none;
+  }
+  input.ans:focus{ border-color: var(--ink); }
+  input.ans:disabled{ color:var(--ink); opacity:1; border-color: transparent; }
+  input.rem-input{
+    width:2.6ch;
+    font-size:14px;
+  }
+
+  /* grading marks */
+  .mark{
+    position:absolute;
+    top:6px;
+    right:8px;
+    font-family:'IBM Plex Mono', monospace;
+    font-weight:700;
+    font-size:12px;
+  }
+  .mark.correct-mark{ color: var(--red); }
+  .mark.wrong-mark{ color: var(--red); }
+  .correction{
+    position:absolute;
+    bottom:6px;
+    right:10px;
+    color:var(--red);
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    font-weight:600;
+  }
+
+  .stamp-svg{
+    position:absolute;
+    top:-10px;
+    right:-10px;
+    width:54px;
+    height:54px;
+    pointer-events:none;
+  }
+  .stamp-circle{
+    fill:none;
+    stroke: var(--red);
+    stroke-width:3;
+    stroke-linecap:round;
+    stroke-dasharray: 210;
+    stroke-dashoffset:210;
+    animation: draw 0.5s ease forwards;
+  }
+  .stamp-check{
+    fill:none;
+    stroke: var(--red);
+    stroke-width:4;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+    stroke-dasharray: 40;
+    stroke-dashoffset:40;
+    animation: draw 0.35s ease 0.3s forwards;
+  }
+  @keyframes draw{ to{ stroke-dashoffset:0; } }
+
+  .cross-mark{
+    position:absolute;
+    top:-8px;
+    right:-8px;
+    width:40px;
+    height:40px;
+  }
+  .cross-mark line{
+    stroke: var(--red);
+    stroke-width:4;
+    stroke-linecap:round;
+    stroke-dasharray:34;
+    stroke-dashoffset:34;
+    animation: draw 0.3s ease forwards;
+  }
+
+  /* result banner */
+  .result-banner{
+    margin-top:22px;
+    padding:16px 18px;
+    border-radius:12px;
+    border:1.5px dashed var(--gold);
+    background: #fdf9ee;
+    display:none;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    flex-wrap:wrap;
+  }
+  .result-banner.show{ display:flex; }
+  .result-msg{
+    font-family:'IBM Plex Serif', serif;
+    font-weight:600;
+    font-size:17px;
+  }
+  .result-sub{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    color:var(--ink-soft);
+  }
+
+  footer.note{
+    text-align:center;
+    color:var(--ink-soft);
+    font-size:12px;
+    margin-top:22px;
+    font-family:'IBM Plex Mono', monospace;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <p class="eyebrow">Media Pembelajaran &nbsp;·&nbsp; Gaya Kumon</p>
+  <h1>Lembar Latihan Pembagian — Level D</h1>
+  <p class="subhead">Pilih tingkat kesulitan seperti membuka tab pada binder Kumon. Setiap kali menekan “Set Baru”, soal dibuat ulang secara acak — kerjakan, lalu periksa jawabanmu langsung di layar.</p>
+
+  <div class="tabs" id="tabs"></div>
+
+  <div class="sheet">
+    <div class="sheet-top">
+      <div>
+        <p class="sheet-title" id="sheetTitle">—</p>
+        <p class="sheet-desc" id="sheetDesc">—</p>
+      </div>
+      <div class="stat-strip">
+        <div class="stat"><div class="num" id="statTime">00:00</div><div class="lbl">Waktu</div></div>
+        <div class="stat"><div class="num" id="statScore">–/10</div><div class="lbl">Skor</div></div>
+      </div>
+    </div>
+
+    <div class="toolbar">
+      <button class="action" id="btnCheck">Periksa Jawaban</button>
+      <button class="action secondary" id="btnNew">Set Baru</button>
+    </div>
+
+    <div class="grid" id="grid"></div>
+
+    <div class="result-banner" id="resultBanner">
+      <div>
+        <div class="result-msg" id="resultMsg">—</div>
+        <div class="result-sub" id="resultSub">—</div>
+      </div>
+      <button class="action secondary" id="btnAgain">Coba Set Lain</button>
+    </div>
+  </div>
+
+  <footer class="note">D‑I s/d D‑VI &nbsp;•&nbsp; latihan dibuat ulang secara acak setiap saat, tidak pernah kehabisan soal</footer>
+</div>
+
+<script>
+const LEVELS = [
+  { id:'D-I',  name:'Pembagian Dasar', color:'#6FA97A',
+    desc:'Pembagian tanpa sisa, hasil bagi satu angka. Hafalkan pola perkaliannya.' },
+  { id:'D-II', name:'Pembagian Bersisa', color:'#4C8FB0',
+    desc:'Pembagian dengan sisa. Tuliskan hasil bagi dan sisanya.' },
+  { id:'D-III',name:'2 Angka ÷ 1 Angka', color:'#7D6EBB',
+    desc:'Pembagian bersusun pendek, bilangan dua angka dibagi satu angka.' },
+  { id:'D-IV', name:'3 Angka ÷ 1 Angka', color:'#C97B4A',
+    desc:'Pembagian bersusun, bilangan tiga angka dibagi satu angka, boleh bersisa.' },
+  { id:'D-V',  name:'Bersusun ÷ 2 Angka', color:'#B84C4C',
+    desc:'Pembagian bersusun dengan pembagi dua angka. Level paling menantang.' },
+  { id:'D-VI', name:'Campuran', color:'#D9A02A',
+    desc:'Gabungan semua jenis soal D‑II sampai D‑V untuk menguji penguasaanmu.' },
+];
+
+let currentLevel = 0;
+let problems = [];
+let timerInterval = null;
+let elapsedSec = 0;
+let checked = false;
+
+function randInt(min, max){ return Math.floor(Math.random()*(max-min+1))+min; }
+
+function makeD1(){
+  const divisor = randInt(2,9);
+  const quotient = randInt(2,9);
+  return { style:'simple', divisor, dividend: divisor*quotient, quotient, remainder:0, hasRemainder:false };
+}
+function makeD2(){
+  const divisor = randInt(2,9);
+  const quotient = randInt(3,12);
+  const remainder = divisor>2 ? randInt(1, divisor-1) : 1;
+  return { style:'simple', divisor, dividend: divisor*quotient+remainder, quotient, remainder, hasRemainder:true };
+}
+function makeD3(){
+  const divisor = randInt(2,9);
+  const quotient = randInt(10,14);
+  return { style:'bracket', divisor, dividend: divisor*quotient, quotient, remainder:0, hasRemainder:false };
+}
+function makeD4(){
+  const divisor = randInt(2,9);
+  const quotient = randInt(11, 99);
+  let remainder = randInt(0, divisor-1);
+  let dividend = divisor*quotient+remainder;
+  if(dividend > 999){ return makeD4(); }
+  return { style:'bracket', divisor, dividend, quotient, remainder, hasRemainder:true };
+}
+function makeD5(){
+  const divisor = randInt(10,99);
+  const quotient = randInt(2, 19);
+  let remainder = randInt(0, divisor-1);
+  let dividend = divisor*quotient+remainder;
+  if(dividend < 100 || dividend > 9999){ return makeD5(); }
+  return { style:'bracket', divisor, dividend, quotient, remainder, hasRemainder:true };
+}
+function makeD6(){
+  const pick = [makeD2, makeD3, makeD4, makeD5][randInt(0,3)];
+  return pick();
+}
+
+const GENERATORS = [makeD1, makeD2, makeD3, makeD4, makeD5, makeD6];
+
+function buildTabs(){
+  const tabWrap = document.getElementById('tabs');
+  tabWrap.innerHTML = '';
+  LEVELS.forEach((lv, i)=>{
+    const b = document.createElement('button');
+    b.className = 'tab' + (i===currentLevel ? ' active' : '');
+    b.style.background = lv.color;
+    b.innerHTML = lv.id + '<small>' + lv.name + '</small>';
+    b.addEventListener('click', ()=> switchLevel(i));
+    tabWrap.appendChild(b);
+  });
+}
+
+function switchLevel(i){
+  currentLevel = i;
+  buildTabs();
+  newSet();
+}
+
+function newSet(){
+  problems = Array.from({length:10}, ()=> GENERATORS[currentLevel]());
+  checked = false;
+  stopTimer();
+  elapsedSec = 0;
+  updateTimerDisplay();
+  startTimer();
+  document.getElementById('resultBanner').classList.remove('show');
+  document.getElementById('btnCheck').disabled = false;
+  document.getElementById('statScore').textContent = '–/10';
+  const lv = LEVELS[currentLevel];
+  document.getElementById('sheetTitle').textContent = lv.id + ' · ' + lv.name;
+  document.getElementById('sheetDesc').textContent = lv.desc;
+  renderGrid();
+}
+
+function renderGrid(){
+  const grid = document.getElementById('grid');
+  grid.innerHTML = '';
+  problems.forEach((p, idx)=>{
+    const card = document.createElement('div');
+    card.className = 'problem';
+    card.id = 'problem-'+idx;
+
+    const num = document.createElement('div');
+    num.className = 'p-index';
+    num.textContent = (idx+1) + '.';
+    card.appendChild(num);
+
+    if(p.style === 'simple'){
+      const row = document.createElement('div');
+      row.className = 'simple-row';
+      row.innerHTML =
+        `<span>${p.dividend} ÷ ${p.divisor} =</span>
+         <input class="ans" type="text" inputmode="numeric" data-idx="${idx}" data-field="q" style="width:${Math.max(2,String(p.quotient).length+1)}ch">`
+        + (p.hasRemainder
+            ? `<span class="rem-part">sisa <input class="ans rem-input" type="text" inputmode="numeric" data-idx="${idx}" data-field="r"></span>`
+            : '');
+      card.appendChild(row);
+    } else {
+      const wrap = document.createElement('div');
+      wrap.className = 'longdiv-wrap';
+      wrap.innerHTML = `
+        <div class="quot-row">
+          <span class="quot-spacer divisor-box" style="border:none;">${p.divisor}</span>
+          <input class="ans quot-input" type="text" inputmode="numeric" data-idx="${idx}" data-field="q">
+        </div>
+        <div class="bracket-row">
+          <div class="divisor-box">${p.divisor}</div>
+          <div class="dividend-box">${p.dividend}</div>
+        </div>
+        ${p.hasRemainder ? `<div class="rem-row">sisa <input class="ans rem-input" type="text" inputmode="numeric" data-idx="${idx}" data-field="r"></div>` : ''}
+      `;
+      card.appendChild(wrap);
+    }
+    grid.appendChild(card);
+  });
+}
+
+function stampSVG(){
+  return `<svg class="stamp-svg" viewBox="0 0 60 60">
+    <circle class="stamp-circle" cx="30" cy="30" r="24" transform="rotate(-8 30 30)"/>
+    <polyline class="stamp-check" points="19,31 27,39 42,20"/>
+  </svg>`;
+}
+function crossSVG(){
+  return `<svg class="cross-mark" viewBox="0 0 40 40">
+    <line x1="8" y1="8" x2="32" y2="32"/>
+    <line x1="32" y1="8" x2="8" y2="32"/>
+  </svg>`;
+}
+
+function checkAnswers(){
+  let score = 0;
+  problems.forEach((p, idx)=>{
+    const card = document.getElementById('problem-'+idx);
+    const qInput = card.querySelector('[data-field="q"]');
+    const rInput = card.querySelector('[data-field="r"]');
+    const qOk = qInput && parseInt(qInput.value,10) === p.quotient;
+    const rOk = !p.hasRemainder || (rInput && parseInt(rInput.value,10) === p.remainder);
+    const isCorrect = qOk && rOk;
+
+    if(qInput) qInput.disabled = true;
+    if(rInput) rInput.disabled = true;
+
+    if(isCorrect){
+      score++;
+      card.classList.add('correct');
+      card.insertAdjacentHTML('beforeend', stampSVG());
+    } else {
+      card.classList.add('incorrect');
+      card.insertAdjacentHTML('beforeend', crossSVG());
+      const correction = document.createElement('div');
+      correction.className = 'correction';
+      correction.textContent = 'Jawaban: ' + p.quotient + (p.hasRemainder ? (' sisa ' + p.remainder) : '');
+      card.appendChild(correction);
+    }
+  });
+
+  checked = true;
+  stopTimer();
+  document.getElementById('btnCheck').disabled = true;
+  document.getElementById('statScore').textContent = score + '/10';
+
+  const banner = document.getElementById('resultBanner');
+  banner.classList.add('show');
+  let msg, sub;
+  if(score === 10){ msg = 'Sempurna! Nilai 100 🎯'; }
+  else if(score >= 8){ msg = 'Bagus sekali!'; }
+  else if(score >= 6){ msg = 'Sudah cukup baik, terus berlatih.'; }
+  else { msg = 'Ayo coba lagi, kamu pasti bisa!'; }
+  sub = 'Skor akhir ' + score + ' dari 10 · waktu ' + formatTime(elapsedSec);
+  document.getElementById('resultMsg').textContent = msg;
+  document.getElementById('resultSub').textContent = sub;
+}
+
+function formatTime(sec){
+  const m = Math.floor(sec/60).toString().padStart(2,'0');
+  const s = (sec%60).toString().padStart(2,'0');
+  return m+':'+s;
+}
+function updateTimerDisplay(){
+  document.getElementById('statTime').textContent = formatTime(elapsedSec);
+}
+function startTimer(){
+  timerInterval = setInterval(()=>{
+    elapsedSec++;
+    updateTimerDisplay();
+  }, 1000);
+}
+function stopTimer(){
+  if(timerInterval){ clearInterval(timerInterval); timerInterval = null; }
+}
+
+document.getElementById('btnCheck').addEventListener('click', ()=>{
+  if(!checked) checkAnswers();
+});
+document.getElementById('btnNew').addEventListener('click', newSet);
+document.getElementById('btnAgain').addEventListener('click', newSet);
+
+buildTabs();
+newSet();
+</script>
+</body>
+</html>
